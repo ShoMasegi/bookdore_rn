@@ -2,6 +2,7 @@ import {CARDS_CLEAR, CARDS_FAILED, CARDS_REQUEST, CARDS_SUCCEEDED, SELECT_CARD} 
 
 const initialState = {
     isCardsFetching: false,
+    selectedCardId: 0,
     cards: []
 };
 
@@ -31,7 +32,8 @@ function cardReducer(state = initialState, action) {
             };
         case SELECT_CARD:
             return {
-                ...state
+                ...state,
+                selectedCardId: payload.id
             };
         default:
             return state;

@@ -27,6 +27,7 @@ function cardsClear() {
 }
 
 function selectCard(id) {
+    console.log(id);
     return {
         type: SELECT_CARD,
         payload: {id}

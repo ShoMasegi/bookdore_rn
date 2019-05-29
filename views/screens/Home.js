@@ -26,7 +26,10 @@ class Home extends Component {
         this.props.searchClear();
     };
 
-    handleCardItemPress = (item) => {
+    handleCardItemPress = (card) => {
+        let {id} = card;
+        this.props.selectCard(id);
+        this.props.navigation.navigate('Card', {id});
     };
 
     componentWillMount(): void {
