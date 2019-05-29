@@ -7,7 +7,6 @@ export default function configureStore() {
     const rootReducer = combineReducers(reducers);
     return createStore(
         rootReducer,
-        composeWithDevTools(),
-        applyMiddleware(ReduxThunk)
+        composeWithDevTools(applyMiddleware(ReduxThunk))
     )
 }

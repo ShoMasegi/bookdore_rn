@@ -1,17 +1,62 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, TextInput, TouchableWithoutFeedback, Keyboard, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {bookOperations} from "../../state/ducks/book";
+import {searchOperations} from "../../state/ducks/search";
+
+import SearchList from '../components/SearchList';
 
 class Home extends Component {
 
+    handleSearch = (query) => {
+        if (typeof query === 'string') {
+            this.props.searchBooks(query);
+        } else {
+            this.props.searchClear()
+        }
+    };
+
+    handleSearchItemPress = (item) => {
+    };
+
+    unfocused = () => {
+        Keyboard.dismiss();
+        this.props.searchClear();
+    };
+
     render() {
-        const {} = this.props;
+        const {
+            isFetching,
+            responses,
+            books
+        } = this.props;
 
         return (
-            <View style={styles.home}>
-            </View>
+            <TouchableWithoutFeedback
+                style={styles.home}
+                onPress={this.unfocused}>
+                <View style={styles.home}>
+                    <View style={styles.searchContainer}>
+                        <TextInput
+                            onChangeText={(text) => this.handleSearch(text)}
+                            style={styles.input}
+                            placeholder={'Search words'}
+                            placeholderTextColor={'#949494'}/>
+                    </View>
+                    <View style={styles.body}>
+                        {(!isFetching && responses && responses.length !== 0) ? (
+                            <SearchList
+                                items={responses}
+                                onItemPress={this.handleSearchItemPress}
+                                style={styles.list}/>
+                        ) : (
+                            <View />
+                            // FIXME: display somethings
+                        )}
+                    </View>
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
@@ -19,19 +64,56 @@ class Home extends Component {
 const styles = StyleSheet.create({
     home: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#AAA',
+        alignItems: 'stretch',
+        backgroundColor: '#AAA'
+    },
+    searchContainer: {
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        height: 42,
+        top: 12,
+        backgroundColor: '#EEE',
+        borderRadius: 21,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    input: {
+        flex: 1,
+        height: 42,
+        paddingLeft: 24,
+        paddingRight: 24,
+        fontSize: 16
+    },
+    empty: {
+        flex: 1,
+        backgroundColor: '#abcdef'
+    },
+    body: {
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: 30
     }
 });
 
 function mapStateToProps(state) {
-    return {}
+    const {
+        isFetching,
+        responses
+    } = state.searchState;
+
+    const {
+        books
+    } = state.bookState;
+
+    return {
+        isFetching,
+        responses,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({...bookOperations}, dispatch)
+        ...bindActionCreators({...searchOperations, ...bookOperations}, dispatch)
     };
 }
 
