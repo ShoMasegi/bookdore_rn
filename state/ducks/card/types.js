@@ -1,5 +1,13 @@
 const SELECT_CARD = 'app/card/SELECT_CARD';
+const CARDS_REQUEST = 'app/card/CARDS_REQUEST';
+const CARDS_SUCCEEDED = 'app/card/CARDS_SUCCEEDED';
+const CARDS_FAILED = 'app/card/CARDS_FAILED';
+const CARDS_CLEAR = 'app/card/CARDS_CLEAR';
 
 export {
-    SELECT_CARD
+    SELECT_CARD,
+    CARDS_REQUEST,
+    CARDS_SUCCEEDED,
+    CARDS_FAILED,
+    CARDS_CLEAR
 };

@@ -6,6 +6,7 @@ import {cardOperations} from "../../state/ducks/card";
 import {searchOperations} from "../../state/ducks/search";
 
 import SearchList from '../components/SearchList';
+import CardList from "../components/CardList";
 
 class Home extends Component {
 
@@ -25,10 +26,19 @@ class Home extends Component {
         this.props.searchClear();
     };
 
+    handleCardItemPress = (item) => {
+    };
+
+    componentWillMount(): void {
+        this.props.fetchCards();
+    }
+
     render() {
         const {
             isFetching,
             responses,
+            isCardsFetching,
+            cards
         } = this.props;
 
         return (
@@ -50,8 +60,12 @@ class Home extends Component {
                                 onItemPress={this.handleSearchItemPress}
                                 style={styles.list}/>
                         ) : (
-                            <View />
-                            // FIXME: display somethings
+                            (!isCardsFetching && cards && cards.length !== 0) ? (
+                                <CardList  items={cards} onItemPress={this.handleCardItemPress}/>
+                            ) : (
+                                // FIXME: display somethings
+                                <View />
+                            )
                         )}
                     </View>
                 </View>
@@ -101,12 +115,15 @@ function mapStateToProps(state) {
     } = state.searchState;
 
     const {
-        books
-    } = state.bookState;
+        isCardsFetching,
+        cards
+    } = state.cardState;
 
     return {
         isFetching,
         responses,
+        isCardsFetching,
+        cards
     }
 }
 
