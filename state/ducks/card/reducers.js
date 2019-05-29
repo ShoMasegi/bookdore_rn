@@ -1,13 +1,12 @@
-import {SELECT_BOOK} from "./types";
+import {SELECT_CARD} from "./types";
 
 const initialState = {
-    
 };
 
-function bookReducer(state = initialState, action) {
+function cardReducer(state = initialState, action) {
     const {type, payload} = action;
     switch (type) {
-        case SELECT_BOOK:
+        case SELECT_CARD:
             return {
                 ...state
             };
@@ -16,4 +15,4 @@ function bookReducer(state = initialState, action) {
     }
 }
 
-export default bookReducer;
+export default cardReducer;

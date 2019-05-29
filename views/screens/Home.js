@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, TextInput, TouchableWithoutFeedback, Keyboard, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {bookOperations} from "../../state/ducks/book";
+import {cardOperations} from "../../state/ducks/card";
 import {searchOperations} from "../../state/ducks/search";
 
 import SearchList from '../components/SearchList';
@@ -29,7 +29,6 @@ class Home extends Component {
         const {
             isFetching,
             responses,
-            books
         } = this.props;
 
         return (
@@ -113,7 +112,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({...searchOperations, ...bookOperations}, dispatch)
+        ...bindActionCreators({...searchOperations, ...cardOperations}, dispatch)
     };
 }
 

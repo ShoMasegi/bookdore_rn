@@ -1,7 +1,7 @@
 import actions from './actions'
 
-const selectBook = actions.selectBook;
+const selectCard = actions.selectCard;
 
 export default {
-    selectBook
+    selectCard
 };
