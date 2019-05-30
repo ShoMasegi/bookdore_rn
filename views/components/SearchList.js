@@ -22,7 +22,7 @@ const SearchList = ({items, onItemPress}) => (
     <FlatList
         data={items}
         extraData={items}
-        renderItem={(item) => renderItem(item, onItemPress)}
+        renderItem={({item, index}) => renderItem({item, onItemPress})}
         numColumns={NUMBER_COLUMNS}
         keyExtractor={(item, index) => index}
         style={styles.list}/>
@@ -74,10 +74,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 10,
         width: cellSize.width,
-        height: cellSize.height,
-        borderStyle: 'solid',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        backgroundColor: '#123456'
+        height: cellSize.height
     },
     title: {
         fontSize: 11,
@@ -89,8 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         width: cellSize.width,
-        height: cellSize.width * 140 / 100,
-        backgroundColor: '#FFF'
+        height: cellSize.width * 140 / 100
     }
 });
 
