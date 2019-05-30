@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
     home: {
         flex: 1,
         alignItems: 'stretch',
-        backgroundColor: '#AAA'
+        backgroundColor: '#FFF'
     },
     searchContainer: {
         alignItems: 'flex-start',
         flexDirection: 'row',
         height: 42,
         top: 12,
-        backgroundColor: '#EEE',
+        backgroundColor: '#EEEEEE',
         borderRadius: 21,
         marginLeft: 20,
         marginRight: 20
@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     empty: {
-        flex: 1,
-        backgroundColor: '#abcdef'
+        flex: 1
     },
     body: {
         flex: 1,
